@@ -295,11 +295,13 @@
             // 
             // cmsAfterCapture
             // 
+            this.cmsAfterCapture.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsAfterCapture.Name = "cmsAfterCapture";
             resources.ApplyResources(this.cmsAfterCapture, "cmsAfterCapture");
             // 
             // cmsAfterUpload
             // 
+            this.cmsAfterUpload.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsAfterUpload.Name = "cmsAfterCapture";
             resources.ApplyResources(this.cmsAfterUpload, "cmsAfterUpload");
             // 
@@ -337,6 +339,7 @@
             // 
             // cmsTask
             // 
+            this.cmsTask.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsTask.Name = "cmsAfterCapture";
             resources.ApplyResources(this.cmsTask, "cmsTask");
             // 
@@ -430,6 +433,7 @@
             // 
             // cmsDestinations
             // 
+            this.cmsDestinations.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsDestinations.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiImageUploaders,
             this.tsmiTextUploaders,
@@ -2034,6 +2038,7 @@
             // 
             this.pgTaskSettings.CategoryForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             resources.ApplyResources(this.pgTaskSettings, "pgTaskSettings");
+            this.pgTaskSettings.LineColor = System.Drawing.SystemColors.ControlDark;
             this.pgTaskSettings.Name = "pgTaskSettings";
             this.pgTaskSettings.PropertySort = System.Windows.Forms.PropertySort.Categorized;
             this.pgTaskSettings.ToolbarVisible = false;

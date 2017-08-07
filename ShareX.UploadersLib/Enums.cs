@@ -53,6 +53,8 @@ namespace ShareX.UploadersLib
         SomeImage,
         [Description("Imgland")]
         Imgland,
+        [Description("Discord")]
+        Discord,
         CustomImageUploader, // Localized
         FileUploader // Localized
     }

@@ -63,6 +63,8 @@ namespace ShareX.UploadersLib
         public static string OneDriveClientSecret = "";
         public static string GfycatClientID = "";
         public static string GfycatClientSecret = "";
+        public static string DiscordClientId = "342329677744046081";
+        public static string DiscordClientSecret = "Jpiu7fypjoWY5y0ngd-dkLQHwjpiGq4R";
 
         // Text Uploaders
         public static string PastebinKey = "";
