@@ -713,6 +713,30 @@ namespace ShareX.UploadersLib
 
         #region Image Uploaders
 
+        #region Discord
+
+        private void txtDiscordEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDiscordLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDiscordPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbDiscordServers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
         #region Imgur
 
         private void atcImgurAccountType_AccountTypeChanged(AccountType accountType)
@@ -3674,5 +3698,6 @@ namespace ShareX.UploadersLib
         #endregion Custom Uploaders
 
         #endregion Other Uploaders
+
     }
 }

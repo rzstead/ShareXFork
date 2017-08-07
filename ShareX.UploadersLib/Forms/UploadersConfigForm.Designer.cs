@@ -648,10 +648,18 @@
             this.txtSomeImageAPIKey = new System.Windows.Forms.TextBox();
             this.lblSomeImageAPIKey = new System.Windows.Forms.Label();
             this.cbSomeImageDirectURL = new System.Windows.Forms.CheckBox();
+            this.tpDiscord = new System.Windows.Forms.TabPage();
+            this.btnDiscordLogin = new System.Windows.Forms.Button();
+            this.txtDiscordPassword = new System.Windows.Forms.TextBox();
+            this.lblDiscordPassword = new System.Windows.Forms.Label();
+            this.txtDiscordEmail = new System.Windows.Forms.TextBox();
+            this.lblDiscordEmail = new System.Windows.Forms.Label();
             this.tcUploaders = new System.Windows.Forms.TabControl();
             this.lblWidthHint = new System.Windows.Forms.Label();
             this.ttlvMain = new ShareX.HelpersLib.TabToListView();
             this.actRapidShareAccountType = new ShareX.UploadersLib.AccountTypeControl();
+            this.lblDiscordServer = new System.Windows.Forms.Label();
+            this.cbDiscordServers = new System.Windows.Forms.ComboBox();
             this.tpOtherUploaders.SuspendLayout();
             this.tcOtherUploaders.SuspendLayout();
             this.tpTwitter.SuspendLayout();
@@ -746,6 +754,7 @@
             this.tpChevereto.SuspendLayout();
             this.tpVgyme.SuspendLayout();
             this.tpSomeImage.SuspendLayout();
+            this.tpDiscord.SuspendLayout();
             this.tcUploaders.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -4661,6 +4670,7 @@
             this.tcImageUploaders.Controls.Add(this.tpChevereto);
             this.tcImageUploaders.Controls.Add(this.tpVgyme);
             this.tcImageUploaders.Controls.Add(this.tpSomeImage);
+            this.tcImageUploaders.Controls.Add(this.tpDiscord);
             resources.ApplyResources(this.tcImageUploaders, "tcImageUploaders");
             this.tcImageUploaders.Name = "tcImageUploaders";
             this.tcImageUploaders.SelectedIndex = 0;
@@ -5283,6 +5293,49 @@
             this.cbSomeImageDirectURL.UseVisualStyleBackColor = true;
             this.cbSomeImageDirectURL.CheckedChanged += new System.EventHandler(this.cbSomeImageDirectURL_CheckedChanged);
             // 
+            // tpDiscord
+            // 
+            this.tpDiscord.Controls.Add(this.cbDiscordServers);
+            this.tpDiscord.Controls.Add(this.lblDiscordServer);
+            this.tpDiscord.Controls.Add(this.btnDiscordLogin);
+            this.tpDiscord.Controls.Add(this.txtDiscordPassword);
+            this.tpDiscord.Controls.Add(this.lblDiscordPassword);
+            this.tpDiscord.Controls.Add(this.txtDiscordEmail);
+            this.tpDiscord.Controls.Add(this.lblDiscordEmail);
+            resources.ApplyResources(this.tpDiscord, "tpDiscord");
+            this.tpDiscord.Name = "tpDiscord";
+            this.tpDiscord.UseVisualStyleBackColor = true;
+            // 
+            // btnDiscordLogin
+            // 
+            resources.ApplyResources(this.btnDiscordLogin, "btnDiscordLogin");
+            this.btnDiscordLogin.Name = "btnDiscordLogin";
+            this.btnDiscordLogin.UseVisualStyleBackColor = true;
+            this.btnDiscordLogin.Click += new System.EventHandler(this.btnDiscordLogin_Click);
+            // 
+            // txtDiscordPassword
+            // 
+            resources.ApplyResources(this.txtDiscordPassword, "txtDiscordPassword");
+            this.txtDiscordPassword.Name = "txtDiscordPassword";
+            this.txtDiscordPassword.UseSystemPasswordChar = true;
+            this.txtDiscordPassword.TextChanged += new System.EventHandler(this.txtDiscordPassword_TextChanged);
+            // 
+            // lblDiscordPassword
+            // 
+            resources.ApplyResources(this.lblDiscordPassword, "lblDiscordPassword");
+            this.lblDiscordPassword.Name = "lblDiscordPassword";
+            // 
+            // txtDiscordEmail
+            // 
+            resources.ApplyResources(this.txtDiscordEmail, "txtDiscordEmail");
+            this.txtDiscordEmail.Name = "txtDiscordEmail";
+            this.txtDiscordEmail.TextChanged += new System.EventHandler(this.txtDiscordEmail_TextChanged);
+            // 
+            // lblDiscordEmail
+            // 
+            resources.ApplyResources(this.lblDiscordEmail, "lblDiscordEmail");
+            this.lblDiscordEmail.Name = "lblDiscordEmail";
+            // 
             // tcUploaders
             // 
             this.tcUploaders.Controls.Add(this.tpImageUploaders);
@@ -5313,6 +5366,18 @@
             resources.ApplyResources(this.actRapidShareAccountType, "actRapidShareAccountType");
             this.actRapidShareAccountType.Name = "actRapidShareAccountType";
             this.actRapidShareAccountType.SelectedAccountType = ShareX.UploadersLib.AccountType.Anonymous;
+            // 
+            // lblDiscordServer
+            // 
+            resources.ApplyResources(this.lblDiscordServer, "lblDiscordServer");
+            this.lblDiscordServer.Name = "lblDiscordServer";
+            // 
+            // cbDiscordServers
+            // 
+            this.cbDiscordServers.FormattingEnabled = true;
+            resources.ApplyResources(this.cbDiscordServers, "cbDiscordServers");
+            this.cbDiscordServers.Name = "cbDiscordServers";
+            this.cbDiscordServers.SelectedIndexChanged += new System.EventHandler(this.cbDiscordServers_SelectedIndexChanged);
             // 
             // UploadersConfigForm
             // 
@@ -5491,6 +5556,8 @@
             this.tpVgyme.PerformLayout();
             this.tpSomeImage.ResumeLayout(false);
             this.tpSomeImage.PerformLayout();
+            this.tpDiscord.ResumeLayout(false);
+            this.tpDiscord.PerformLayout();
             this.tcUploaders.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -6120,6 +6187,13 @@
         private System.Windows.Forms.Button btnSFTPKeyLocationBrowse;
         private System.Windows.Forms.Label lblSFTPKeyPassphrase;
         private System.Windows.Forms.LinkLabel sulKeyLink;
-
+        private System.Windows.Forms.TabPage tpDiscord;
+        private System.Windows.Forms.Button btnDiscordLogin;
+        private System.Windows.Forms.TextBox txtDiscordPassword;
+        private System.Windows.Forms.Label lblDiscordPassword;
+        private System.Windows.Forms.TextBox txtDiscordEmail;
+        private System.Windows.Forms.Label lblDiscordEmail;
+        private System.Windows.Forms.Label lblDiscordServer;
+        private System.Windows.Forms.ComboBox cbDiscordServers;
     }
 }
