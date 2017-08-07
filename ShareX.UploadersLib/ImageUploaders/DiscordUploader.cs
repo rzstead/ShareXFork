@@ -32,6 +32,7 @@ using System.Web;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System;
+using Newtonsoft.Json;
 
 namespace ShareX.UploadersLib.ImageUploaders
 {
@@ -49,29 +50,58 @@ namespace ShareX.UploadersLib.ImageUploaders
 
         public override GenericUploader CreateUploader(UploadersConfig config, TaskReferenceHelper taskInfo)
         {
-            return new DiscordUploader(APIKeys.DiscordClientId, APIKeys.DiscordClientSecret);
+            return new DiscordUploader(config.DiscordOauth2Info);
         }
 
         //REMEMBER TO MAKE A FORM FOR DISCORD USER LOGIN DETAILS STUFF THINGS
         public override TabPage GetUploadersConfigTabPage(UploadersConfigForm form) => form.tpTinyPic;
     }
 
-    public sealed class DiscordUploader : ImageUploader
+    public sealed class DiscordUploader : ImageUploader, IOAuth2Basic
     {
-        public string DiscordID { get; set; }
-        public string DiscordSecret { get; set; }
+        public OAuth2Info AuthInfo { get; set; }
 
         private const string URLAPI = "https://discordapp.com/api/";
 
-        public DiscordUploader(string id, string secret)
+        public DiscordUploader(OAuth2Info auth)
         {
-            DiscordID = id;
-            DiscordSecret = secret;
+            AuthInfo = auth;
         }
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
             throw new NotImplementedException();
+        }
+
+        public string GetAuthorizationURL()
+        {
+            Dictionary<string, string> args = new Dictionary<string, string>();
+
+            args.Add("client_id", AuthInfo.Client_ID);
+
+            return CreateQuery(URLAPI + "/oauth2/authorize", args);
+        }
+
+        public bool GetAccessToken(string code)
+        {
+            Dictionary<string, string> args = new Dictionary<string, string>();
+            args.Add("client_id", AuthInfo.Client_ID);
+
+            string response = SendRequestMultiPart("https://discordapp/api/oauth2/authorize", args);
+
+            if (!string.IsNullOrEmpty(response))
+            {
+                OAuth2Token token = JsonConvert.DeserializeObject<OAuth2Token>(response);
+
+                if (token != null && !string.IsNullOrEmpty(token.access_token))
+                {
+                    token.UpdateExpireDate();
+                    AuthInfo.Token = token;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

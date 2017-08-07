@@ -36,6 +36,13 @@ namespace ShareX.UploadersLib
     {
         #region Image uploaders
 
+        //Discord
+
+        public OAuth2Info DiscordOauth2Info = null;
+        public string DiscordUserName = "";
+        public string DiscordPassword = "";
+        public List<string> DiscordGuilds = null;
+
         // Imgur
 
         public AccountType ImgurAccountType = AccountType.Anonymous;
