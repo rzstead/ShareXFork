@@ -168,6 +168,10 @@ namespace ShareX.UploadersLib
         {
             #region Image uploaders
 
+            //Discord
+
+            
+
             // Imgur
 
             oauth2Imgur.Enabled = Config.ImgurAccountType == AccountType.User;
