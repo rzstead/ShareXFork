@@ -41,6 +41,8 @@ namespace ShareX.UploadersLib
         public OAuth2Info DiscordOauth2Info = null;
         public string DiscordUserName = "";
         public string DiscordPassword = "";
+        public string DiscordCurrentGuild = "";
+        public int DiscordCurrentGuildPosition = 0;
         public List<string> DiscordGuilds = null;
 
         // Imgur

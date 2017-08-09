@@ -649,6 +649,8 @@
             this.lblSomeImageAPIKey = new System.Windows.Forms.Label();
             this.cbSomeImageDirectURL = new System.Windows.Forms.CheckBox();
             this.tpDiscord = new System.Windows.Forms.TabPage();
+            this.cbDiscordServers = new System.Windows.Forms.ComboBox();
+            this.lblDiscordServer = new System.Windows.Forms.Label();
             this.btnDiscordLogin = new System.Windows.Forms.Button();
             this.txtDiscordPassword = new System.Windows.Forms.TextBox();
             this.lblDiscordPassword = new System.Windows.Forms.Label();
@@ -658,8 +660,7 @@
             this.lblWidthHint = new System.Windows.Forms.Label();
             this.ttlvMain = new ShareX.HelpersLib.TabToListView();
             this.actRapidShareAccountType = new ShareX.UploadersLib.AccountTypeControl();
-            this.lblDiscordServer = new System.Windows.Forms.Label();
-            this.cbDiscordServers = new System.Windows.Forms.ComboBox();
+            this.btnDiscordShareXBot = new System.Windows.Forms.Button();
             this.tpOtherUploaders.SuspendLayout();
             this.tcOtherUploaders.SuspendLayout();
             this.tpTwitter.SuspendLayout();
@@ -5295,6 +5296,7 @@
             // 
             // tpDiscord
             // 
+            this.tpDiscord.Controls.Add(this.btnDiscordShareXBot);
             this.tpDiscord.Controls.Add(this.cbDiscordServers);
             this.tpDiscord.Controls.Add(this.lblDiscordServer);
             this.tpDiscord.Controls.Add(this.btnDiscordLogin);
@@ -5305,6 +5307,18 @@
             resources.ApplyResources(this.tpDiscord, "tpDiscord");
             this.tpDiscord.Name = "tpDiscord";
             this.tpDiscord.UseVisualStyleBackColor = true;
+            // 
+            // cbDiscordServers
+            // 
+            this.cbDiscordServers.FormattingEnabled = true;
+            resources.ApplyResources(this.cbDiscordServers, "cbDiscordServers");
+            this.cbDiscordServers.Name = "cbDiscordServers";
+            this.cbDiscordServers.SelectedIndexChanged += new System.EventHandler(this.cbDiscordServers_SelectedIndexChanged);
+            // 
+            // lblDiscordServer
+            // 
+            resources.ApplyResources(this.lblDiscordServer, "lblDiscordServer");
+            this.lblDiscordServer.Name = "lblDiscordServer";
             // 
             // btnDiscordLogin
             // 
@@ -5367,17 +5381,12 @@
             this.actRapidShareAccountType.Name = "actRapidShareAccountType";
             this.actRapidShareAccountType.SelectedAccountType = ShareX.UploadersLib.AccountType.Anonymous;
             // 
-            // lblDiscordServer
+            // btnDiscordShareXBot
             // 
-            resources.ApplyResources(this.lblDiscordServer, "lblDiscordServer");
-            this.lblDiscordServer.Name = "lblDiscordServer";
-            // 
-            // cbDiscordServers
-            // 
-            this.cbDiscordServers.FormattingEnabled = true;
-            resources.ApplyResources(this.cbDiscordServers, "cbDiscordServers");
-            this.cbDiscordServers.Name = "cbDiscordServers";
-            this.cbDiscordServers.SelectedIndexChanged += new System.EventHandler(this.cbDiscordServers_SelectedIndexChanged);
+            resources.ApplyResources(this.btnDiscordShareXBot, "btnDiscordShareXBot");
+            this.btnDiscordShareXBot.Name = "btnDiscordShareXBot";
+            this.btnDiscordShareXBot.UseVisualStyleBackColor = true;
+            this.btnDiscordShareXBot.Click += new System.EventHandler(this.btnDiscordShareXBot_Click);
             // 
             // UploadersConfigForm
             // 
@@ -6195,5 +6204,6 @@
         private System.Windows.Forms.Label lblDiscordEmail;
         private System.Windows.Forms.Label lblDiscordServer;
         private System.Windows.Forms.ComboBox cbDiscordServers;
+        private System.Windows.Forms.Button btnDiscordShareXBot;
     }
 }

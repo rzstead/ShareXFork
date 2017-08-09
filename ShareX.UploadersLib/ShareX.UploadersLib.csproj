@@ -963,6 +963,7 @@
     <None Include="Favicons\Pastie.png" />
     <Content Include="Favicons\AzureStorage.png" />
     <None Include="Favicons\Plik.ico" />
+    <None Include="Favicons\Discord.ico" />
     <Content Include="Favicons\Gfycat.png" />
     <Content Include="Favicons\Uplea.ico" />
   </ItemGroup>
