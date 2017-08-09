@@ -53,8 +53,7 @@ namespace ShareX.UploadersLib.ImageUploaders
             return new DiscordUploader(config.DiscordOauth2Info);
         }
 
-        //REMEMBER TO MAKE A FORM FOR DISCORD USER LOGIN DETAILS STUFF THINGS
-        public override TabPage GetUploadersConfigTabPage(UploadersConfigForm form) => form.tpTinyPic;
+        public override TabPage GetUploadersConfigTabPage(UploadersConfigForm form) => form.tpDiscord;
     }
 
     public sealed class DiscordUploader : ImageUploader, IOAuth2Basic
@@ -87,7 +86,7 @@ namespace ShareX.UploadersLib.ImageUploaders
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("client_id", AuthInfo.Client_ID);
 
-            string response = SendRequestMultiPart("https://discordapp/api/oauth2/authorize", args);
+            string response = SendRequestMultiPart(URLAPI + "oauth2/authorize", args);
 
             if (!string.IsNullOrEmpty(response))
             {

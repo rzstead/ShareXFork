@@ -6187,7 +6187,7 @@
         private System.Windows.Forms.Button btnSFTPKeyLocationBrowse;
         private System.Windows.Forms.Label lblSFTPKeyPassphrase;
         private System.Windows.Forms.LinkLabel sulKeyLink;
-        private System.Windows.Forms.TabPage tpDiscord;
+        internal System.Windows.Forms.TabPage tpDiscord;
         private System.Windows.Forms.Button btnDiscordLogin;
         private System.Windows.Forms.TextBox txtDiscordPassword;
         private System.Windows.Forms.Label lblDiscordPassword;
