@@ -40,7 +40,7 @@ namespace ShareX.UploadersLib.ImageUploaders
     {
         public override ImageDestination EnumValue { get; } = ImageDestination.Discord;
 
-        public override Icon ServiceIcon => Resources.TinyPic;
+        public override Icon ServiceIcon => Resources.Discord;
 
         public override bool CheckConfig(UploadersConfig config)
         {
@@ -54,7 +54,7 @@ namespace ShareX.UploadersLib.ImageUploaders
         }
 
         //REMEMBER TO MAKE A FORM FOR DISCORD USER LOGIN DETAILS STUFF THINGS
-        public override TabPage GetUploadersConfigTabPage(UploadersConfigForm form) => form.tpTinyPic;
+        public override TabPage GetUploadersConfigTabPage(UploadersConfigForm form) => form.tpDiscord;
     }
 
     public sealed class DiscordUploader : ImageUploader, IOAuth2Basic

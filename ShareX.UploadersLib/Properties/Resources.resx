@@ -395,4 +395,7 @@ Created folders:</value>
   <data name="UploadersConfigForm_CustomUploader_Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="Discord" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\favicons\discord.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
