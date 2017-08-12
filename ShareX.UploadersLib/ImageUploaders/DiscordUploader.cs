@@ -31,6 +31,8 @@ using System.Windows.Forms;
 using System;
 using Newtonsoft.Json;
 using ShareX.HelpersLib;
+using CG.Web.MegaApiClient;
+using Newtonsoft.Json.Linq;
 
 namespace ShareX.UploadersLib.ImageUploaders
 {
@@ -55,7 +57,7 @@ namespace ShareX.UploadersLib.ImageUploaders
     public sealed class DiscordUploader : ImageUploader
     {
         public Dictionary<string, ulong> GuildData { get; set; } = new Dictionary<string, ulong>();
-        string URLAPI = "http://192.168.1.142:57331/api/";
+        string URLAPI = "http://localhost:57331/api/";
         public override UploadResult Upload(Stream stream, string fileName)
         {
             UploadResult result = null;
@@ -79,18 +81,25 @@ namespace ShareX.UploadersLib.ImageUploaders
                 { "password", password }
             };
 
-            string response = SendRequestURLEncoded(HttpMethod.GET, URLAPI + "/Bot/Login", args);
+            WebClient client = new WebClient();
+            Uri uri = new Uri(URLAPI + "Bot/Login?email=" + userName + "&password=" + password);
+            var response = client.PostRequestJson(uri, "");
 
             if (!string.IsNullOrEmpty(response))
             {
-                List<Tuple<string, ulong>> responseList = (List<Tuple<string, ulong>>)JsonConvert.DeserializeObject(response);
-                foreach(Tuple<string, ulong> guild in responseList)
+                var responses = JArray.Parse(response);
+
+                foreach(JObject obj in responses)
                 {
-                    GuildData.Add(guild.Item1, guild.Item2);
+                    string item1 = (string)obj.SelectToken("Item1");
+                    ulong item2 = (ulong)obj.SelectToken("Item2");
+
+                    GuildData.Add(item1, item2);
+
                 }
 
                 List<string> guilds = new List<string>();
-                foreach(string s in GuildData.Keys)
+                foreach (string s in GuildData.Keys)
                 {
                     guilds.Add(s);
                 }
