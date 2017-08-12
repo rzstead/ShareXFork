@@ -23,16 +23,14 @@
 
 #endregion License Information (GPL v3)
 
-using ShareX.HelpersLib;
 using ShareX.UploadersLib.Properties;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Web;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using System;
 using Newtonsoft.Json;
+using ShareX.HelpersLib;
 
 namespace ShareX.UploadersLib.ImageUploaders
 {
@@ -50,55 +48,25 @@ namespace ShareX.UploadersLib.ImageUploaders
 
         public override GenericUploader CreateUploader(UploadersConfig config, TaskReferenceHelper taskInfo)
         {
-            return new DiscordUploader(config.DiscordOauth2Info);
+            return new DiscordUploader();
         }
         public override TabPage GetUploadersConfigTabPage(UploadersConfigForm form) => form.tpDiscord;    }
 
-    public sealed class DiscordUploader : ImageUploader, IOAuth2Basic
+    public sealed class DiscordUploader : ImageUploader
     {
-        public OAuth2Info AuthInfo { get; set; }
-
-        private const string URLAPI = "https://discordapp.com/api/";
-
-        public DiscordUploader(OAuth2Info auth)
-        {
-            AuthInfo = auth;
-        }
-
+        string URLAPI = "http://localhost:57331/api/Bot/Upload";
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            throw new NotImplementedException();
-        }
+            UploadResult result = null;
+            result = SendRequestFile(URLAPI, stream, fileName);
 
-        public string GetAuthorizationURL()
-        {
-            Dictionary<string, string> args = new Dictionary<string, string>();
-
-            args.Add("client_id", AuthInfo.Client_ID);
-
-            return CreateQuery(URLAPI + "/oauth2/authorize", args);
-        }
-
-        public bool GetAccessToken(string code)
-        {
-            Dictionary<string, string> args = new Dictionary<string, string>();
-            args.Add("client_id", AuthInfo.Client_ID);
-
-            string response = SendRequestMultiPart(URLAPI + "oauth2/authorize", args);
-
-            if (!string.IsNullOrEmpty(response))
+            if (result.IsSuccess)
             {
-                OAuth2Token token = JsonConvert.DeserializeObject<OAuth2Token>(response);
-
-                if (token != null && !string.IsNullOrEmpty(token.access_token))
-                {
-                    token.UpdateExpireDate();
-                    AuthInfo.Token = token;
-                    return true;
-                }
+                result.URL = Helpers.GetXMLValue(result.Response, "fullsize");
+                result.ThumbnailURL = Helpers.GetXMLValue(result.Response, "thumbnail");
             }
 
-            return false;
+            return result;
         }
     }
 }

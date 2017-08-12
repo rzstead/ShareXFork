@@ -170,14 +170,7 @@ namespace ShareX.UploadersLib
 
             //Discord
 
-            txtDiscordEmail.Text = Config.DiscordUserName;
-            txtDiscordPassword.Text = Config.DiscordPassword;
-            cbDiscordServers.Items.Clear();
-            if (Config.DiscordGuilds != null)
-            {
-                cbDiscordServers.Items.AddRange(Config.DiscordGuilds.ToArray());
-            }
-            cbDiscordServers.SelectedIndex = Config.DiscordCurrentGuildPosition;
+            
 
             // Imgur
 
@@ -731,12 +724,12 @@ namespace ShareX.UploadersLib
 
         }
 
-        private void txtDiscordPassword_TextChanged(object sender, EventArgs e)
+        private void btnDiscordLogin_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnDiscordLogin_Click(object sender, EventArgs e)
+        private void txtDiscordPassword_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -3714,7 +3707,6 @@ namespace ShareX.UploadersLib
         #endregion Custom Uploaders
 
         #endregion Other Uploaders
-
 
     }
 }
