@@ -23,16 +23,14 @@
 
 #endregion License Information (GPL v3)
 
-using ShareX.HelpersLib;
 using ShareX.UploadersLib.Properties;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Web;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using System;
 using Newtonsoft.Json;
+using ShareX.HelpersLib;
 
 namespace ShareX.UploadersLib.ImageUploaders
 {
@@ -50,75 +48,56 @@ namespace ShareX.UploadersLib.ImageUploaders
 
         public override GenericUploader CreateUploader(UploadersConfig config, TaskReferenceHelper taskInfo)
         {
-            return new DiscordUploader(config.DiscordOauth2Info);
+            return new DiscordUploader();
         }
         public override TabPage GetUploadersConfigTabPage(UploadersConfigForm form) => form.tpDiscord;    }
 
-    public sealed class DiscordUploader : ImageUploader, IOAuth2Basic
+    public sealed class DiscordUploader : ImageUploader
     {
-        public OAuth2Info AuthInfo { get; set; }
-
-        private const string URLAPI = "https://discordapp.com/api/";
-
-        public DiscordUploader(OAuth2Info auth)
-        {
-            AuthInfo = auth;
-        }
-
+        public Dictionary<string, ulong> GuildData { get; set; } = new Dictionary<string, ulong>();
+        string URLAPI = "http://192.168.1.142:57331/api/";
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            throw new NotImplementedException();
+            UploadResult result = null;
+            result = SendRequestFile(URLAPI + "Bot//Upload", stream, fileName);
+
+            if (result.IsSuccess)
+            {
+                result.URL = Helpers.GetXMLValue(result.Response, "fullsize");
+                result.ThumbnailURL = Helpers.GetXMLValue(result.Response, "thumbnail");
+            }
+
+            return result;
         }
 
-        public string GetAuthorizationURL()
-        {
-            Dictionary<string, string> args = new Dictionary<string, string>();
-
-            args.Add("client_id", AuthInfo.Client_ID);
-
-            return CreateQuery(URLAPI + "/oauth2/authorize", args);
-        }
-
-        public string UserAuth(string email, string password)
+        public List<string> Login(string userName, string password)
         {
 
             Dictionary<string, string> args = new Dictionary<string, string>
             {
-                { "email", email },
+                { "email", userName },
                 { "password", password }
             };
 
-            string response = SendRequestMultiPart(URLAPI + "auth/login", args);
+            string response = SendRequestURLEncoded(HttpMethod.GET, URLAPI + "/Bot/Login", args);
 
             if (!string.IsNullOrEmpty(response))
             {
-
-                return response;
-            }
-
-            return "";
-        }
-
-        public bool GetAccessToken(string code)
-        {
-            Dictionary<string, string> args = new Dictionary<string, string>();
-            args.Add("client_id", AuthInfo.Client_ID);
-
-            string response = SendRequestMultiPart(URLAPI + "oauth2/authorize", args);
-
-            if (!string.IsNullOrEmpty(response))
-            {
-                OAuth2Token token = JsonConvert.DeserializeObject<OAuth2Token>(response);
-
-                if (token != null && !string.IsNullOrEmpty(token.access_token))
+                List<Tuple<string, ulong>> responseList = (List<Tuple<string, ulong>>)JsonConvert.DeserializeObject(response);
+                foreach(Tuple<string, ulong> guild in responseList)
                 {
-                    token.UpdateExpireDate();
-                    AuthInfo.Token = token;
-                    return true;
+                    GuildData.Add(guild.Item1, guild.Item2);
                 }
+
+                List<string> guilds = new List<string>();
+                foreach(string s in GuildData.Keys)
+                {
+                    guilds.Add(s);
+                }
+                return guilds;
             }
 
-            return false;
+            return null;
         }
     }
 }

@@ -172,12 +172,15 @@ namespace ShareX.UploadersLib
 
             txtDiscordEmail.Text = Config.DiscordUserName;
             txtDiscordPassword.Text = Config.DiscordPassword;
-            cbDiscordServers.Items.Clear();
-            if (Config.DiscordGuilds != null)
+            string[] servers = Config.DiscordGuilds?.ToArray();
+            if(servers != null)
             {
-                cbDiscordServers.Items.AddRange(Config.DiscordGuilds.ToArray());
+                cbDiscordServers.Items.AddRange(servers);
             }
-            cbDiscordServers.SelectedIndex = Config.DiscordCurrentGuildPosition;
+            if(cbDiscordServers.Items.Count > 0)
+            {
+                cbDiscordServers.SelectedIndex = Config.DiscordCurrentGuildPosition;
+            }
 
             // Imgur
 
@@ -728,12 +731,7 @@ namespace ShareX.UploadersLib
 
         private void txtDiscordEmail_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void txtDiscordPassword_TextChanged(object sender, EventArgs e)
-        {
-
+            Config.DiscordUserName = txtDiscordEmail.Text;
         }
 
         private void btnDiscordLogin_Click(object sender, EventArgs e)
@@ -741,12 +739,20 @@ namespace ShareX.UploadersLib
             string email = txtDiscordEmail.Text;
             string password = txtDiscordPassword.Text;
 
-            DiscordUploader du = new DiscordUploader(Config.DiscordOauth2Info);
-            //string registrationCode = du.UserAuth(email, password);
+            DiscordUploader du = new DiscordUploader();
+            cbDiscordServers.Items.Clear();
+            cbDiscordServers.Items.AddRange(du.Login(email, password).ToArray());
+        }
+
+        private void txtDiscordPassword_TextChanged(object sender, EventArgs e)
+        {
+            Config.DiscordPassword = txtDiscordPassword.Text;
         }
 
         private void cbDiscordServers_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Config.DiscordCurrentGuildPosition = cbDiscordServers.SelectedIndex;
+            Config.DiscordCurrentGuild = (string)cbDiscordServers.SelectedItem;
 
         }
 
@@ -3713,7 +3719,6 @@ namespace ShareX.UploadersLib
         #endregion Custom Uploaders
 
         #endregion Other Uploaders
-
 
     }
 }
