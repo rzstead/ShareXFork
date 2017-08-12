@@ -738,15 +738,14 @@ namespace ShareX.UploadersLib
 
         private void btnDiscordLogin_Click(object sender, EventArgs e)
         {
+            string email = txtDiscordEmail.Text;
+            string password = txtDiscordPassword.Text;
 
+            DiscordUploader du = new DiscordUploader(Config.DiscordOauth2Info);
+            //string registrationCode = du.UserAuth(email, password);
         }
 
         private void cbDiscordServers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnDiscordShareXBot_Click(object sender, EventArgs e)
         {
 
         }

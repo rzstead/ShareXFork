@@ -17755,36 +17755,6 @@ Using an encrypted library disables sharing.</value>
   <data name="&gt;&gt;tpSomeImage.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="btnDiscordShareXBot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnDiscordShareXBot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 165</value>
-  </data>
-  <data name="btnDiscordShareXBot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="btnDiscordShareXBot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 30</value>
-  </data>
-  <data name="btnDiscordShareXBot.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="btnDiscordShareXBot.Text" xml:space="preserve">
-    <value>Enable ShareX Bot</value>
-  </data>
-  <data name="&gt;&gt;btnDiscordShareXBot.Name" xml:space="preserve">
-    <value>btnDiscordShareXBot</value>
-  </data>
-  <data name="&gt;&gt;btnDiscordShareXBot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnDiscordShareXBot.Parent" xml:space="preserve">
-    <value>tpDiscord</value>
-  </data>
-  <data name="&gt;&gt;btnDiscordShareXBot.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="cbDiscordServers.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 165</value>
   </data>
@@ -17804,7 +17774,7 @@ Using an encrypted library disables sharing.</value>
     <value>tpDiscord</value>
   </data>
   <data name="&gt;&gt;cbDiscordServers.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="lblDiscordServer.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -17837,7 +17807,7 @@ Using an encrypted library disables sharing.</value>
     <value>tpDiscord</value>
   </data>
   <data name="&gt;&gt;lblDiscordServer.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="btnDiscordLogin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -17867,7 +17837,7 @@ Using an encrypted library disables sharing.</value>
     <value>tpDiscord</value>
   </data>
   <data name="&gt;&gt;btnDiscordLogin.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="txtDiscordPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 105</value>
@@ -17891,7 +17861,7 @@ Using an encrypted library disables sharing.</value>
     <value>tpDiscord</value>
   </data>
   <data name="&gt;&gt;txtDiscordPassword.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="lblDiscordPassword.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -17924,7 +17894,7 @@ Using an encrypted library disables sharing.</value>
     <value>tpDiscord</value>
   </data>
   <data name="&gt;&gt;lblDiscordPassword.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="txtDiscordEmail.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 43</value>
@@ -17948,7 +17918,7 @@ Using an encrypted library disables sharing.</value>
     <value>tpDiscord</value>
   </data>
   <data name="&gt;&gt;txtDiscordEmail.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lblDiscordEmail.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -17981,7 +17951,7 @@ Using an encrypted library disables sharing.</value>
     <value>tpDiscord</value>
   </data>
   <data name="&gt;&gt;lblDiscordEmail.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="tpDiscord.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>

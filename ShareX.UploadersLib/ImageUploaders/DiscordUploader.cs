@@ -79,6 +79,26 @@ namespace ShareX.UploadersLib.ImageUploaders
             return CreateQuery(URLAPI + "/oauth2/authorize", args);
         }
 
+        public string UserAuth(string email, string password)
+        {
+
+            Dictionary<string, string> args = new Dictionary<string, string>
+            {
+                { "email", email },
+                { "password", password }
+            };
+
+            string response = SendRequestMultiPart(URLAPI + "auth/login", args);
+
+            if (!string.IsNullOrEmpty(response))
+            {
+
+                return response;
+            }
+
+            return "";
+        }
+
         public bool GetAccessToken(string code)
         {
             Dictionary<string, string> args = new Dictionary<string, string>();
