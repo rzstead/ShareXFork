@@ -172,7 +172,7 @@ namespace ShareX.UploadersLib
 
             txtDiscordEmail.Text = Config.DiscordUserName;
             txtDiscordPassword.Text = Config.DiscordPassword;
-            string[] servers = Config.DiscordGuilds?.ToArray();
+            DiscordServer[] servers = Config.DiscordGuilds?.ToArray();
             if(servers != null)
             {
                 cbDiscordServers.Items.AddRange(servers);
@@ -739,9 +739,21 @@ namespace ShareX.UploadersLib
             string email = txtDiscordEmail.Text;
             string password = txtDiscordPassword.Text;
 
-            DiscordUploader du = new DiscordUploader();
+            DiscordUploader du = new DiscordUploader(Config);
             cbDiscordServers.Items.Clear();
-            cbDiscordServers.Items.AddRange(du.Login(email, password).ToArray());
+            List<DiscordServer> servers = du.Login(email, password);
+            if(servers != null || servers.Count > 0)
+            {
+                Config.DiscordGuilds = servers;
+                cbDiscordServers.Items.AddRange(servers.ToArray());
+                cbDiscordServers.SelectedItem = cbDiscordServers.Items[0];
+                Config.DiscordIsLoggedIn = true;
+            }
+            else
+            {
+                Config.DiscordIsLoggedIn = false;
+            }
+
         }
 
         private void txtDiscordPassword_TextChanged(object sender, EventArgs e)
@@ -752,7 +764,7 @@ namespace ShareX.UploadersLib
         private void cbDiscordServers_SelectedIndexChanged(object sender, EventArgs e)
         {
             Config.DiscordCurrentGuildPosition = cbDiscordServers.SelectedIndex;
-            Config.DiscordCurrentGuild = (string)cbDiscordServers.SelectedItem;
+            Config.DiscordCurrentGuild = (DiscordServer)cbDiscordServers.SelectedItem;
 
         }
 

@@ -44,24 +44,31 @@ namespace ShareX.UploadersLib.ImageUploaders
 
         public override bool CheckConfig(UploadersConfig config)
         {
-            return false;
-            //return config.TinyPicAccountType == AccountType.Anonymous || !string.IsNullOrEmpty(config.TinyPicRegistrationCode);
+            return config.DiscordIsLoggedIn;
         }
 
         public override GenericUploader CreateUploader(UploadersConfig config, TaskReferenceHelper taskInfo)
         {
-            return new DiscordUploader();
+            return new DiscordUploader(config);
         }
         public override TabPage GetUploadersConfigTabPage(UploadersConfigForm form) => form.tpDiscord;    }
 
     public sealed class DiscordUploader : ImageUploader
     {
-        public Dictionary<string, ulong> GuildData { get; set; } = new Dictionary<string, ulong>();
         string URLAPI = "http://localhost:57331/api/";
+        UploadersConfig Config;
+
+        public DiscordUploader(UploadersConfig config = null)
+        {
+            Config = config;
+        }
+
         public override UploadResult Upload(Stream stream, string fileName)
         {
+
             UploadResult result = null;
-            result = SendRequestFile(URLAPI + "Bot//Upload", stream, fileName);
+            Login(Config.DiscordUserName, Config.DiscordPassword);
+            result = SendRequestFile(URLAPI + "Bot/Upload?server=" + Config.DiscordCurrentGuild.ServerID, stream, fileName);
 
             if (result.IsSuccess)
             {
@@ -72,14 +79,9 @@ namespace ShareX.UploadersLib.ImageUploaders
             return result;
         }
 
-        public List<string> Login(string userName, string password)
+        public List<DiscordServer> Login(string userName, string password)
         {
-
-            Dictionary<string, string> args = new Dictionary<string, string>
-            {
-                { "email", userName },
-                { "password", password }
-            };
+            List<DiscordServer> GuildData = new List<DiscordServer>();
 
             WebClient client = new WebClient();
             Uri uri = new Uri(URLAPI + "Bot/Login?email=" + userName + "&password=" + password);
@@ -94,19 +96,32 @@ namespace ShareX.UploadersLib.ImageUploaders
                     string item1 = (string)obj.SelectToken("Item1");
                     ulong item2 = (ulong)obj.SelectToken("Item2");
 
-                    GuildData.Add(item1, item2);
+                    GuildData.Add(new DiscordServer(item1, item2));
 
                 }
 
-                List<string> guilds = new List<string>();
-                foreach (string s in GuildData.Keys)
-                {
-                    guilds.Add(s);
-                }
-                return guilds;
+                return GuildData;
             }
 
             return null;
+        }
+
+    }
+
+    public class DiscordServer
+    {
+        public string ServerName { get; set; }
+        public ulong ServerID { get; set; }
+
+        public DiscordServer(string name, ulong id)
+        {
+            ServerName = name;
+            ServerID = id;
+        }
+
+        public override string ToString()
+        {
+            return ServerName;
         }
     }
 }
