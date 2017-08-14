@@ -66,7 +66,8 @@ namespace ShareXBot.Models
             while (_user.ConnectionState != ConnectionState.Connected)
             {
             }
-            await _user.GetGuild(serverId).DefaultChannel.SendFileAsync(Path.GetTempPath() + fileName, "");
+            _user.GetGuild(serverId).DefaultChannel.SendFileAsync(Path.GetTempPath() + fileName, "");
+            await _user.StopAsync();
         }
 
     }

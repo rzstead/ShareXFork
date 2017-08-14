@@ -10,6 +10,7 @@ using Discord.WebSocket;
 using ShareXBot.Models;
 using System.IO;
 using System.Web;
+using System.Web.Http.Results;
 
 namespace ShareXBot.Controllers
 {
@@ -33,8 +34,8 @@ namespace ShareXBot.Controllers
             var file = HttpContext.Current.Request.Files.Count > 0 ? HttpContext.Current.Request.Files[0] : null;
             System.Drawing.Image img = System.Drawing.Image.FromStream(file.InputStream);
             img.Save(Path.GetTempPath() + file.FileName);
-            Bot.PostImage(server, file.FileName).GetAwaiter().GetResult();
-            return Ok();
+            Bot.PostImage(server, file.FileName);
+            return Json("Ok");
         }
 
     }
